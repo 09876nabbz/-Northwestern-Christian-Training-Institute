@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Northwestern Christian Training Institute</title>
+<title>NCTI — Northwestern Christian Training Institute</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -247,6 +247,77 @@
   }
   .prog-card .enroll-btn:hover { background: var(--crimson); transform: translateY(-2px); }
 
+  /* ── LOGO IMAGE ── */
+  .nav-logo-badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0; background: white;
+  }
+  .nav-logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── HERO RIGHT PANEL (leadership) ── */
+  .hero-right {
+    position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+    z-index: 2; width: 340px;
+    animation: fadeIn 1s 0.5s ease both;
+  }
+  .leadership-panel {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px; padding: 24px;
+  }
+  .leadership-panel .panel-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 18px; text-align: center;
+  }
+  .leaders-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 14px; }
+  .leaders-row-bottom { display: flex; justify-content: center; gap: 12px; }
+  .leader-card { text-align: center; width: 88px; }
+  .leader-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 2px solid rgba(245,197,24,0.5);
+    margin: 0 auto 8px;
+    background: linear-gradient(135deg, #2A2A6E, #1A1A4E);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: var(--gold); font-weight: 800;
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+  }
+  .leader-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .leader-name { font-size: 10px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .leader-role { font-size: 9px; color: rgba(245,197,24,0.8); margin-top: 2px; line-height: 1.3; }
+
+  /* ── PAYMENT SECTION ── */
+  .payment-section { background: var(--deep-navy); }
+  .payment-section .section-title { color: var(--white); }
+  .payment-section .section-subtitle { color: rgba(255,255,255,0.6); }
+  .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .pay-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 32px 28px;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .pay-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.4); background: rgba(255,255,255,0.09); }
+  .pay-card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(245,197,24,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .pay-card h4 { color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+  .pay-detail { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .pay-detail:last-of-type { border: none; }
+  .pay-detail .lbl { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+  .pay-detail .val { font-size: 14px; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif; }
+  .pay-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 14px; line-height: 1.6; }
+  .pay-methods-list { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .pay-chip {
+    padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15);
+  }
+
   /* ── COURSE TABS ── */
   .courses-section { background: var(--white); }
   .course-tabs {
@@ -261,10 +332,8 @@
   }
   .tab-btn:hover { border-color: var(--gold); color: var(--deep-navy); }
   .tab-btn.active { background: var(--deep-navy); border-color: var(--deep-navy); color: var(--white); }
-
   .course-panel { display: none; }
   .course-panel.active { display: block; }
-
   .course-level-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--light-gold); border: 1px solid rgba(245,197,24,0.3);
@@ -289,12 +358,9 @@
   }
   .course-item-name { font-size: 13px; font-weight: 600; color: var(--deep-navy); line-height: 1.4; }
   .course-item-code { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
-
   .cert-icon { background: rgba(192,22,44,0.1); }
   .dip-icon { background: rgba(26,26,78,0.1); }
   .ba-icon { background: rgba(245,197,24,0.2); }
-  .ma-icon { background: rgba(26,26,78,0.15); }
-  .phd-icon { background: rgba(192,22,44,0.15); }
 
   /* ── FACILITIES ── */
   .facilities { background: var(--deep-navy); }
@@ -405,7 +471,7 @@
     padding: 60px 5% 30px;
     color: rgba(255,255,255,0.6);
   }
-  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 48px; }
   .footer-brand .name { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 12px; }
   .footer-brand p { font-size: 14px; line-height: 1.7; }
   .footer-brand .tagline { color: var(--gold); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 16px; }
@@ -442,9 +508,7 @@
   @media (max-width: 900px) {
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
-    .hero-stats { position: static; flex-direction: row; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
-    .stat-card { flex: 1; min-width: 120px; }
-    .hero { flex-direction: column; }
+    .hero-right { display: none; }
     .why-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
@@ -465,6 +529,7 @@
   <button class="close-btn" onclick="toggleMenu()">✕</button>
   <a href="#programmes" onclick="toggleMenu()">Programmes</a>
   <a href="#courses" onclick="toggleMenu()">Courses</a>
+  <a href="#payment" onclick="toggleMenu()">Payment</a>
   <a href="#facilities" onclick="toggleMenu()">Facilities</a>
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
@@ -474,7 +539,9 @@
 <!-- Navigation -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-badge">NCTI</div>
+    <div class="nav-logo-badge">
+      <img src="logo.png" alt="NCTI Logo" onerror="this.style.display='none';this.parentElement.style.background='#F5C518';this.parentElement.innerHTML+='<span style=\'font-family:serif;font-weight:900;font-size:11px;color:#1A1A4E\'>NCTI</span>'">
+    </div>
     <div class="nav-logo-text">
       <strong>Northwestern Christian</strong>
       <span>Training Institute</span>
@@ -483,6 +550,7 @@
   <ul class="nav-links">
     <li><a href="#programmes">Programmes</a></li>
     <li><a href="#courses">Courses</a></li>
+    <li><a href="#payment">Payment</a></li>
     <li><a href="#facilities">Facilities</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -509,23 +577,57 @@
       Admissions Open — June Intake 2026
     </div>
     <h1>Where Faith Meets <span>Excellence</span> in Learning</h1>
-    <p class="hero-sub">Northwestern Christian Training Institute builds foundations for lifelong success, offering accredited Diploma and Certificate programmes that transform lives through quality Christian education.</p>
+    <p class="hero-sub">NCTI builds foundations for lifelong success, offering accredited programmes from Certificate to Bachelor's Degree that transform lives through quality Christian education.</p>
     <div class="hero-actions">
       <a href="#programmes" class="btn-primary">Explore Programmes →</a>
       <a href="#contact" class="btn-secondary">📞 Contact Us</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="number">25+</div>
-        <div class="label">Years of Excellence</div>
+    <!-- Logo + Stats -->
+    <div style="display:flex;align-items:center;gap:24px;margin-top:48px;flex-wrap:wrap;">
+      <!-- NCTI Seal -->
+      <div style="width:90px;height:90px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(245,197,24,0.5);flex-shrink:0;overflow:hidden;">
+        <img src="logo.png" alt="NCTI Seal" style="width:86px;height:86px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">
       </div>
-      <div class="stat-card">
-        <div class="number">50+</div>
-        <div class="label">Study Programmes</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="stat-card"><div class="number">25+</div><div class="label">Years of Excellence</div></div>
+        <div class="stat-card"><div class="number">50+</div><div class="label">Study Programmes</div></div>
+        <div class="stat-card"><div class="number">100%</div><div class="label">Committed to You</div></div>
       </div>
-      <div class="stat-card">
-        <div class="number">100%</div>
-        <div class="label">Committed to You</div>
+    </div>
+  </div>
+
+  <!-- Leadership Panel -->
+  <div class="hero-right">
+    <div class="leadership-panel">
+      <div class="panel-title">School Top Leadership 2025</div>
+      <div class="leaders-row">
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="minodi.jpg" alt="Dr Albert Minodi" onerror="this.outerHTML='AM'"></div>
+          <div class="leader-name">Dr Albert Minodi</div>
+          <div class="leader-role">President</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="ayoma.jpg" alt="Mildred Ayoma Ebole" onerror="this.outerHTML='MA'"></div>
+          <div class="leader-name">Mildred Ayoma Ebole</div>
+          <div class="leader-role">Kenya Registered NTI</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="mulumbi.jpg" alt="Dr Robert Mulumbi" onerror="this.outerHTML='RM'"></div>
+          <div class="leader-name">Dr Robert Mulumbi</div>
+          <div class="leader-role">International Director</div>
+        </div>
+      </div>
+      <div class="leaders-row-bottom">
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="ezine.jpg" alt="Dr Enos Ezine" onerror="this.outerHTML='EE'"></div>
+          <div class="leader-name">Dr Enos Ezine</div>
+          <div class="leader-role">National Director, Kenya</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="karanu.jpg" alt="Jesse Karanu" onerror="this.outerHTML='JK'"></div>
+          <div class="leader-name">Jesse Karanu</div>
+          <div class="leader-role">Head of Publicity &amp; Communication</div>
+        </div>
       </div>
     </div>
   </div>
@@ -596,37 +698,25 @@
 <section class="courses-section" id="courses">
   <div class="reveal">
     <div class="section-label">Course Directory</div>
-    <h2 class="section-title">All Programmes & Courses</h2>
-    <p class="section-subtitle">Browse our full catalogue of accredited programmes — from short certificates to doctoral research degrees.</p>
+    <h2 class="section-title">All Programmes &amp; Courses</h2>
+    <p class="section-subtitle">Browse our full catalogue — from short certificates to Bachelor's degree programmes.</p>
   </div>
-
   <div class="course-tabs">
-    <button class="tab-btn active" onclick="showTab('cert')">📜 Certificate</button>
-    <button class="tab-btn" onclick="showTab('dip')">🎓 Diploma</button>
-    <button class="tab-btn" onclick="showTab('ba')">🏛️ Bachelor's Degree</button>
-    <button class="tab-btn" onclick="showTab('ma')">📚 Master's Degree</button>
-    <button class="tab-btn" onclick="showTab('phd')">🔬 Doctoral (PhD)</button>
+    <button class="tab-btn active" onclick="showTab('cert',event)">📜 Certificate</button>
+    <button class="tab-btn" onclick="showTab('dip',event)">🎓 Diploma</button>
+    <button class="tab-btn" onclick="showTab('ba',event)">🏛️ Bachelor's Degree (BA)</button>
   </div>
 
   <!-- Certificate -->
   <div class="course-panel active reveal" id="panel-cert">
     <div class="course-level-badge">📜 Certificate Programmes &nbsp;|&nbsp; 6 Months – 1 Year &nbsp;|&nbsp; KShs 15,000</div>
     <div class="course-grid">
-      <div class="course-item">
-        <div class="course-item-icon cert-icon">📜</div>
-        <div><div class="course-item-name">Certificate (General)</div><div class="course-item-code">CERT-GEN</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon cert-icon">✝️</div>
-        <div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">CERT-BIBLE &amp; THEOLOGY</div></div>
-      </div>
+      <div class="course-item"><div class="course-item-icon cert-icon">📜</div><div><div class="course-item-name">Certificate (General)</div><div class="course-item-code">CERT-GEN</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">CERT-BIBLE &amp; THEOLOGY</div></div></div>
     </div>
-    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;">
+    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <span style="font-size:1.5rem;">💡</span>
-      <div>
-        <strong style="color:var(--deep-navy);">Registration Fee: KShs 500</strong>
-        <p style="color:var(--text-muted);font-size:13px;margin-top:2px;">One-time registration. Short, focused curriculum for fast career entry.</p>
-      </div>
+      <div><strong style="color:var(--deep-navy);">Registration Fee: KShs 500</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">One-time registration. Short, focused curriculum for fast career entry.</p></div>
       <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
     </div>
   </div>
@@ -635,45 +725,18 @@
   <div class="course-panel reveal" id="panel-dip">
     <div class="course-level-badge">🎓 Diploma Programmes &nbsp;|&nbsp; 2 Years &nbsp;|&nbsp; KShs 30,000/yr</div>
     <div class="course-grid">
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">🎓</div>
-        <div><div class="course-item-name">Diploma (General)</div><div class="course-item-code">DIP-GEN</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">✝️</div>
-        <div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">DIP-BIBLE &amp; THEOLOGY</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">🕊️</div>
-        <div><div class="course-item-name">Conflict Resolution</div><div class="course-item-code">DIP-CONFLICT RESOLUTION</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">🧠</div>
-        <div><div class="course-item-name">Counseling Psychology</div><div class="course-item-code">DIP-COUNSELING PSYCHOLOGY</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">🏢</div>
-        <div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">DIP-LAM</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">📋</div>
-        <div><div class="course-item-name">Project Planning</div><div class="course-item-code">DIP-PROJECT PLANNING</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">🏛️</div>
-        <div><div class="course-item-name">Public Administration</div><div class="course-item-code">DIP-PUBLIC ADMINISTRATION</div></div>
-      </div>
-      <div class="course-item">
-        <div class="course-item-icon dip-icon">⚖️</div>
-        <div><div class="course-item-name">Public Admin &amp; Governance</div><div class="course-item-code">DIP-PUBLIC ADMIN &amp; GOVERNANCE</div></div>
-      </div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🎓</div><div><div class="course-item-name">Diploma (General)</div><div class="course-item-code">DIP-GEN</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">DIP-BIBLE &amp; THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🕊️</div><div><div class="course-item-name">Conflict Resolution</div><div class="course-item-code">DIP-CONFLICT RESOLUTION</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🧠</div><div><div class="course-item-name">Counseling Psychology</div><div class="course-item-code">DIP-COUNSELING PSYCHOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🏢</div><div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">DIP-LAM</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📋</div><div><div class="course-item-name">Project Planning</div><div class="course-item-code">DIP-PROJECT PLANNING</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🏛️</div><div><div class="course-item-name">Public Administration</div><div class="course-item-code">DIP-PUBLIC ADMINISTRATION</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">⚖️</div><div><div class="course-item-name">Public Admin &amp; Governance</div><div class="course-item-code">DIP-PUBLIC ADMIN &amp; GOVERNANCE</div></div></div>
     </div>
-    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;">
+    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
       <span style="font-size:1.5rem;">💡</span>
-      <div>
-        <strong style="color:var(--deep-navy);">Registration Fee: KShs 1,000</strong>
-        <p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Comprehensive 2-year curriculum with recognized qualifications.</p>
-      </div>
+      <div><strong style="color:var(--deep-navy);">Registration Fee: KShs 1,000</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Comprehensive 2-year curriculum with recognized qualifications.</p></div>
       <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
     </div>
   </div>
@@ -709,45 +772,62 @@
       <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
     </div>
   </div>
+</section>
 
-  <!-- MA -->
-  <div class="course-panel reveal" id="panel-ma">
-    <div class="course-level-badge">📚 Master's Degree (MA) Programmes</div>
-    <div class="course-grid">
-      <div class="course-item"><div class="course-item-icon ma-icon">📚</div><div><div class="course-item-name">MA Degree (General)</div><div class="course-item-code">MA-DEGREE</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🎨</div><div><div class="course-item-name">Arts</div><div class="course-item-code">MA-ARTS</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">MA-BIBLE &amp; THEOLOGY</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🧠</div><div><div class="course-item-name">Counseling Psychology</div><div class="course-item-code">MA-COUNSELING PSYCHOLOGY</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">📐</div><div><div class="course-item-name">Education Planning</div><div class="course-item-code">MA-EDUCATION PLANNING</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🗣️</div><div><div class="course-item-name">Kiswahili</div><div class="course-item-code">MA-KISWAHILI</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🏢</div><div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">MA-LAM</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🌟</div><div><div class="course-item-name">Leadership &amp; Public Governance</div><div class="course-item-code">MA-LEADERSHIP &amp; PUBLIC GOVERNANCE</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">💬</div><div><div class="course-item-name">Linguistics</div><div class="course-item-code">MA-LINGUISTICS</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">📋</div><div><div class="course-item-name">Project Planning</div><div class="course-item-code">MA-PROJECT PLANNING</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">⚖️</div><div><div class="course-item-name">Public Admin &amp; Governance</div><div class="course-item-code">MA-PUBLIC ADMIN &amp; GOVERNANCE</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🏛️</div><div><div class="course-item-name">Public Admin &amp; Political Science</div><div class="course-item-code">MA-PUBLIC ADMIN &amp; POLITICAL SCIENCE</div></div></div>
-      <div class="course-item"><div class="course-item-icon ma-icon">🙏</div><div><div class="course-item-name">Religion</div><div class="course-item-code">MA-RELIGION</div></div></div>
-    </div>
-    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <span style="font-size:1.5rem;">💡</span>
-      <div><strong style="color:var(--deep-navy);">13 Specializations Available</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Contact admissions for fee structure and entry requirements.</p></div>
-      <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
-    </div>
+<!-- Payment Details -->
+<section class="payment-section" id="payment">
+  <div class="reveal">
+    <div class="section-label" style="color:var(--gold);">How to Pay</div>
+    <h2 class="section-title">Payment Details</h2>
+    <p class="section-subtitle">Pay your registration and tuition fees conveniently via M-Pesa Paybill, mobile money, or direct bank deposit.</p>
   </div>
+  <div class="payment-grid">
 
-  <!-- PhD -->
-  <div class="course-panel reveal" id="panel-phd">
-    <div class="course-level-badge">🔬 Doctoral (PhD) Programmes</div>
-    <div class="course-grid">
-      <div class="course-item"><div class="course-item-icon phd-icon">🌾</div><div><div class="course-item-name">Agriculture</div><div class="course-item-code">PHD-AGRICULTURE</div></div></div>
-      <div class="course-item"><div class="course-item-icon phd-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">PHD-BIBLE &amp; THEOLOGY</div></div></div>
-      <div class="course-item"><div class="course-item-icon phd-icon">🗣️</div><div><div class="course-item-name">Kiswahili</div><div class="course-item-code">PHD-KISWAHILI</div></div></div>
-      <div class="course-item"><div class="course-item-icon phd-icon">🏢</div><div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">PHD-LAM</div></div></div>
+    <!-- M-Pesa Paybill -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">📱</div>
+      <h4>M-Pesa Paybill (Lipa Na Paybill)</h4>
+      <div class="pay-detail"><span class="lbl">Business Number</span><span class="val">400200</span></div>
+      <div class="pay-detail"><span class="lbl">Account Number</span><span class="val">1049314</span></div>
+      <div class="pay-detail"><span class="lbl">Account Name</span><span class="val" style="font-size:12px;">North Western Christian Training Institute</span></div>
+      <div class="pay-methods-list">
+        <span class="pay-chip">📱 M-Pesa</span>
+        <span class="pay-chip">Airtel Money</span>
+        <span class="pay-chip">T-Kash</span>
+        <span class="pay-chip">PesaLink</span>
+        <span class="pay-chip">Mco-op Cash</span>
+      </div>
+      <div class="pay-note">Dial *334# (Airtel), *160# (T-Kash), or *667# (Mco-op Cash). Use your <strong style="color:var(--gold)">Full Name</strong> and <strong style="color:var(--gold)">Registration Number</strong> as the account reference.</div>
     </div>
-    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <span style="font-size:1.5rem;">💡</span>
-      <div><strong style="color:var(--deep-navy);">Research-Level Qualifications</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Contact admissions for PhD fee structure and research requirements.</p></div>
-      <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
+
+    <!-- Co-op Bank -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">🏦</div>
+      <h4>Co-operative Bank — Direct Deposit</h4>
+      <div class="pay-detail"><span class="lbl">Bank</span><span class="val">Co-operative Bank</span></div>
+      <div class="pay-detail"><span class="lbl">Account Name</span><span class="val" style="font-size:12px;">North Western Christian Training Institute</span></div>
+      <div class="pay-detail"><span class="lbl">Account Number</span><span class="val">01101938930002</span></div>
+      <div class="pay-detail"><span class="lbl">Account Type</span><span class="val">Current</span></div>
+      <div class="pay-methods-list">
+        <span class="pay-chip">Bank Transfer</span>
+        <span class="pay-chip">RTGS</span>
+        <span class="pay-chip">EFT</span>
+        <span class="pay-chip">PesaLink</span>
+      </div>
+      <div class="pay-note">After payment, send your deposit slip or M-Pesa confirmation to <strong style="color:var(--gold)">+254 725 979 300</strong> on WhatsApp together with your full name and course.</div>
+    </div>
+
+    <!-- Fee Summary -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">💰</div>
+      <h4>Fee Summary</h4>
+      <div class="pay-detail"><span class="lbl">Certificate Registration</span><span class="val">KShs 500</span></div>
+      <div class="pay-detail"><span class="lbl">Certificate Tuition</span><span class="val">KShs 15,000</span></div>
+      <div class="pay-detail"><span class="lbl">Diploma Registration</span><span class="val">KShs 1,000</span></div>
+      <div class="pay-detail"><span class="lbl">Diploma Tuition/yr</span><span class="val">KShs 30,000</span></div>
+      <div class="pay-detail"><span class="lbl">BA &amp; Above Registration</span><span class="val">KShs 1,000</span></div>
+      <div class="pay-note">Tuition for BA, MA, and PhD programmes — contact admissions for the current fee structure.</div>
+      <a href="#contact" class="btn-primary" style="margin-top:20px;display:flex;justify-content:center;">📞 Ask Admissions</a>
     </div>
   </div>
 </section>
@@ -847,6 +927,20 @@
   <div class="contact-grid">
     <div class="contact-info reveal">
       <div class="contact-item">
+        <div class="icon">💳</div>
+        <div class="info">
+          <strong>M-Pesa Paybill</strong>
+          <span>Business No: <strong>400200</strong> · Account: <strong>1049314</strong></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🏦</div>
+        <div class="info">
+          <strong>Co-op Bank Account</strong>
+          <span>01101938930002 (Current)</span>
+        </div>
+      </div>
+      <div class="contact-item">
         <div class="icon">📞</div>
         <div class="info">
           <strong>Phone / WhatsApp</strong>
@@ -897,63 +991,9 @@
           <label>Programme of Interest</label>
           <select id="programme">
             <option value="">Select a programme</option>
-            <optgroup label="── Certificate Programmes ──">
-              <option>CERT - Certificate (General)</option>
-              <option>CERT - Bible &amp; Theology</option>
-            </optgroup>
-            <optgroup label="── Diploma Programmes ──">
-              <option>DIP - Diploma (General)</option>
-              <option>DIP - Bible &amp; Theology</option>
-              <option>DIP - Conflict Resolution</option>
-              <option>DIP - Counseling Psychology</option>
-              <option>DIP - Leadership Administration &amp; Management</option>
-              <option>DIP - Project Planning</option>
-              <option>DIP - Public Administration</option>
-              <option>DIP - Public Admin &amp; Governance</option>
-            </optgroup>
-            <optgroup label="── Bachelor's Degree (BA) ──">
-              <option>BA - Degree (General)</option>
-              <option>BA - Bible &amp; Theology</option>
-              <option>BA - Business Management</option>
-              <option>BA - Counseling Psychology</option>
-              <option>BA - Criminal Justice</option>
-              <option>BA - Criminology</option>
-              <option>BA - ECDE &amp; Primary</option>
-              <option>BA - Education (English / Kiswahili)</option>
-              <option>BA - Education (History / Kiswahili)</option>
-              <option>BA - Education (Kiswahili / Geography)</option>
-              <option>BA - HR &amp; Social Development</option>
-              <option>BA - Human Resource Management</option>
-              <option>BA - Kiswahili / CRE</option>
-              <option>BA - Leadership Administration &amp; Management</option>
-              <option>BA - Political Science</option>
-              <option>BA - Project Planning</option>
-              <option>BA - Public Administration</option>
-              <option>BA - Public Admin &amp; Governance</option>
-              <option>BA - Social Work &amp; Criminology</option>
-              <option>BA - Special Needs Education</option>
-            </optgroup>
-            <optgroup label="── Master's Degree (MA) ──">
-              <option>MA - Degree (General)</option>
-              <option>MA - Arts</option>
-              <option>MA - Bible &amp; Theology</option>
-              <option>MA - Counseling Psychology</option>
-              <option>MA - Education Planning</option>
-              <option>MA - Kiswahili</option>
-              <option>MA - Leadership Administration &amp; Management</option>
-              <option>MA - Leadership &amp; Public Governance</option>
-              <option>MA - Linguistics</option>
-              <option>MA - Project Planning</option>
-              <option>MA - Public Admin &amp; Governance</option>
-              <option>MA - Public Admin &amp; Political Science</option>
-              <option>MA - Religion</option>
-            </optgroup>
-            <optgroup label="── Doctoral (PhD) ──">
-              <option>PhD - Agriculture</option>
-              <option>PhD - Bible &amp; Theology</option>
-              <option>PhD - Kiswahili</option>
-              <option>PhD - Leadership Administration &amp; Management</option>
-            </optgroup>
+            <option>Diploma (2 Years) — KShs 30,000</option>
+            <option>Certificate (6 Months) — KShs 15,000</option>
+            <option>Certificate (1 Year) — KShs 15,000</option>
           </select>
         </div>
         <div class="form-group">
@@ -974,7 +1014,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="name">Northwestern Christian Training Institute</div>
+      <div class="name">NCTI — Northwestern Christian Training Institute</div>
       <p>Building foundations for lifelong learning, success, and faithful service since 1999. Study to Shine.</p>
       <div class="tagline">✦ Study to Shine ✦</div>
     </div>
@@ -984,8 +1024,14 @@
         <li><a href="#courses">Certificate Programmes</a></li>
         <li><a href="#courses">Diploma Programmes</a></li>
         <li><a href="#courses">Bachelor's Degree (BA)</a></li>
-        <li><a href="#courses">Master's Degree (MA)</a></li>
-        <li><a href="#courses">Doctoral (PhD)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>How to Pay</h5>
+      <ul>
+        <li><a href="#payment">M-Pesa Paybill: 400200</a></li>
+        <li><a href="#payment">Account No: 1049314</a></li>
+        <li><a href="#payment">Co-op Bank: 01101938930002</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -999,18 +1045,18 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Northwestern Christian Training Institute. All rights reserved.</p>
+    <p>© 2026 NCTI — Northwestern Christian Training Institute. All rights reserved.</p>
     <p><a href="mailto:northwesternchristiantraininginstitute@gmail.com" style="color:var(--gold);text-decoration:none;">northwesternchristiantraininginstitute@gmail.com</a></p>
   </div>
 </footer>
 
 <script>
   // Course tabs
-  function showTab(id) {
+  function showTab(id, event) {
     document.querySelectorAll('.course-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('panel-' + id).classList.add('active');
-    event.target.classList.add('active');
+    if(event && event.target) event.target.classList.add('active');
   }
 
   // Navbar scroll effect
