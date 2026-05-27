@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCTI — Northwestern Christian Training Institute</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5C518;
+    --deep-navy: #1A1A4E;
+    --crimson: #C0162C;
+    --white: #FFFFFF;
+    --off-white: #F9F6EE;
+    --light-gold: #FFF8D6;
+    --dark: #0D0D2B;
+    --text-muted: #6B6B8A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--off-white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(26,26,78,0.97);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+  }
+  nav.scrolled { background: rgba(26,26,78,1); }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 13px; color: var(--deep-navy);
+    flex-shrink: 0;
+  }
+  .nav-logo-text { color: var(--white); }
+  .nav-logo-text strong { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+  .nav-logo-text span { font-size: 10px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.3px;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--gold); color: var(--deep-navy);
+    padding: 9px 22px; border-radius: 50px; font-weight: 700;
+    font-size: 13px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,197,24,0.4); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--deep-navy) 0%, #2A1A6E 50%, #1A0D3E 100%);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 80% 50%, rgba(245,197,24,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 300px 300px at 10% 80%, rgba(192,22,44,0.12) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 650px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3);
+    color: var(--gold); padding: 6px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white); line-height: 1.1;
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.7); line-height: 1.7;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--deep-navy);
+    padding: 14px 32px; border-radius: 50px; font-weight: 700;
+    font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(245,197,24,0.4); }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    padding: 14px 32px; border-radius: 50px; font-weight: 600;
+    font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(245,197,24,0.08); }
+
+  .hero-stats {
+    position: absolute; right: 5%; bottom: 60px; z-index: 2;
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeIn 1s 0.6s ease both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 16px; padding: 20px 28px; text-align: center;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .stat-card:hover { transform: translateX(-6px); background: rgba(255,255,255,0.12); }
+  .stat-card .number { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 900; }
+  .stat-card .label { font-size: 12px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  /* ── INTAKE BANNER ── */
+  .intake-banner {
+    background: var(--crimson);
+    padding: 20px 5%;
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    flex-wrap: wrap; text-align: center;
+  }
+  .intake-banner .label { color: rgba(255,255,255,0.8); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+  .intake-banner strong { color: var(--white); font-size: 1.1rem; font-weight: 700; }
+  .intake-banner .pill {
+    background: var(--gold); color: var(--dark);
+    padding: 6px 18px; border-radius: 50px; font-size: 13px; font-weight: 700;
+    animation: glow 2s infinite alternate;
+  }
+  @keyframes glow { from{box-shadow:0 0 0 rgba(245,197,24,0)} to{box-shadow:0 0 20px rgba(245,197,24,0.6)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+  .section-label {
+    font-size: 12px; font-weight: 700; color: var(--crimson);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--deep-navy); margin-bottom: 16px; line-height: 1.2;
+  }
+  .section-subtitle { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 560px; }
+
+  /* ── PROGRAMMES ── */
+  .programmes { background: var(--off-white); }
+  .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
+
+  .prog-card {
+    background: var(--white);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .prog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+  .prog-card-top {
+    padding: 36px 32px 28px;
+    background: linear-gradient(135deg, var(--deep-navy), #2A1A6E);
+    position: relative; overflow: hidden;
+  }
+  .prog-card-top::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(245,197,24,0.1);
+  }
+  .prog-card-top .badge {
+    display: inline-block; background: var(--gold);
+    color: var(--deep-navy); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 4px 12px; border-radius: 50px; margin-bottom: 16px;
+  }
+  .prog-card-top h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--white); margin-bottom: 8px;
+  }
+  .prog-card-top .duration { color: rgba(255,255,255,0.65); font-size: 13px; }
+
+  .prog-card-body { padding: 28px 32px; }
+  .fee-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .fee-row:not(:last-child) { padding-bottom: 14px; border-bottom: 1px solid #F0EDE6; }
+  .fee-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .fee-amount { font-weight: 700; color: var(--deep-navy); font-size: 1.05rem; }
+  .fee-amount span { font-size: 12px; color: var(--crimson); font-weight: 600; margin-left: 4px; }
+
+  .prog-card .enroll-btn {
+    display: block; text-align: center; margin-top: 24px;
+    background: var(--deep-navy); color: var(--white);
+    padding: 13px; border-radius: 12px; font-weight: 600;
+    text-decoration: none; font-size: 14px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .prog-card .enroll-btn:hover { background: var(--crimson); transform: translateY(-2px); }
+
+  /* ── LOGO IMAGE ── */
+  .nav-logo-badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0; background: white;
+  }
+  .nav-logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── HERO RIGHT PANEL (leadership) ── */
+  .hero-right {
+    position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+    z-index: 2; width: 340px;
+    animation: fadeIn 1s 0.5s ease both;
+  }
+  .leadership-panel {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px; padding: 24px;
+  }
+  .leadership-panel .panel-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 18px; text-align: center;
+  }
+  .leaders-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 14px; }
+  .leaders-row-bottom { display: flex; justify-content: center; gap: 12px; }
+  .leader-card { text-align: center; width: 88px; }
+  .leader-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 2px solid rgba(245,197,24,0.5);
+    margin: 0 auto 8px;
+    background: linear-gradient(135deg, #2A2A6E, #1A1A4E);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: var(--gold); font-weight: 800;
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+  }
+  .leader-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .leader-name { font-size: 10px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .leader-role { font-size: 9px; color: rgba(245,197,24,0.8); margin-top: 2px; line-height: 1.3; }
+
+  /* ── PAYMENT SECTION ── */
+  .payment-section { background: var(--deep-navy); }
+  .payment-section .section-title { color: var(--white); }
+  .payment-section .section-subtitle { color: rgba(255,255,255,0.6); }
+  .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .pay-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; padding: 32px 28px;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .pay-card:hover { transform: translateY(-6px); border-color: rgba(245,197,24,0.4); background: rgba(255,255,255,0.09); }
+  .pay-card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(245,197,24,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .pay-card h4 { color: var(--white); font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+  .pay-detail { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .pay-detail:last-of-type { border: none; }
+  .pay-detail .lbl { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+  .pay-detail .val { font-size: 14px; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif; }
+  .pay-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 14px; line-height: 1.6; }
+  .pay-methods-list { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .pay-chip {
+    padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ── COURSE TABS ── */
+  .courses-section { background: var(--white); }
+  .course-tabs {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 36px 0 32px;
+  }
+  .tab-btn {
+    padding: 10px 22px; border-radius: 50px; border: 2px solid #E5E2D8;
+    background: var(--white); color: var(--text-muted);
+    font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .tab-btn:hover { border-color: var(--gold); color: var(--deep-navy); }
+  .tab-btn.active { background: var(--deep-navy); border-color: var(--deep-navy); color: var(--white); }
+  .course-panel { display: none; }
+  .course-panel.active { display: block; }
+  .course-level-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--light-gold); border: 1px solid rgba(245,197,24,0.3);
+    color: var(--deep-navy); padding: 6px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .course-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .course-item {
+    background: var(--off-white); border-radius: 14px;
+    padding: 18px 20px; border: 1.5px solid transparent;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .course-item:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
+  .course-item-icon {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .course-item-name { font-size: 13px; font-weight: 600; color: var(--deep-navy); line-height: 1.4; }
+  .course-item-code { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+  .cert-icon { background: rgba(192,22,44,0.1); }
+  .dip-icon { background: rgba(26,26,78,0.1); }
+  .ba-icon { background: rgba(245,197,24,0.2); }
+
+  /* ── MOBILE LEADERSHIP ── */
+  .mobile-leadership {
+    display: none;
+    background: var(--deep-navy);
+    padding: 40px 20px;
+  }
+  .mobile-leadership .panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    text-align: center; margin-bottom: 24px;
+  }
+  .mobile-leaders-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; max-width: 500px; margin: 0 auto;
+  }
+  .mobile-leaders-bottom {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; max-width: 340px; margin: 16px auto 0;
+  }
+  .mobile-leader-card { text-align: center; }
+  .mobile-leader-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 2.5px solid rgba(245,197,24,0.6);
+    margin: 0 auto 8px; overflow: hidden;
+    background: #2A2A6E;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: var(--gold); font-weight: 800;
+  }
+  .mobile-leader-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .mobile-leader-name { font-size: 11px; font-weight: 700; color: white; line-height: 1.3; }
+  .mobile-leader-role { font-size: 10px; color: rgba(245,197,24,0.8); margin-top: 2px; line-height: 1.3; }
+
+  /* ── FACILITIES ── */
+  .facilities { background: var(--deep-navy); }
+  .facilities .section-title { color: var(--white); }
+  .facilities .section-subtitle { color: rgba(255,255,255,0.6); }
+  .fac-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+
+  .fac-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 32px 24px;
+    transition: background 0.3s, transform 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .fac-card:hover { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.3); transform: translateY(-6px); }
+  .fac-icon {
+    width: 54px; height: 54px; border-radius: 14px;
+    background: rgba(245,197,24,0.15); display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+    transition: background 0.3s;
+  }
+  .fac-card:hover .fac-icon { background: rgba(245,197,24,0.25); }
+  .fac-card h4 { color: var(--white); font-weight: 600; font-size: 1rem; margin-bottom: 8px; }
+  .fac-card p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; }
+
+  /* ── WHY US ── */
+  .why-us { background: var(--light-gold); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 0; }
+  .why-visual {
+    background: linear-gradient(135deg, var(--deep-navy), #2A1A6E);
+    border-radius: 24px; padding: 48px 40px;
+    color: var(--white); position: relative; overflow: hidden;
+  }
+  .why-visual::before {
+    content: '"'; font-family: 'Playfair Display', serif;
+    font-size: 14rem; color: rgba(245,197,24,0.08);
+    position: absolute; top: -40px; left: 20px; line-height: 1;
+  }
+  .why-visual .quote { font-size: 1.2rem; line-height: 1.8; position: relative; z-index: 1; font-style: italic; }
+  .why-visual .cite { margin-top: 24px; font-size: 13px; color: var(--gold); font-weight: 600; }
+
+  .why-points { display: flex; flex-direction: column; gap: 20px; }
+  .why-point {
+    display: flex; gap: 18px; align-items: flex-start;
+    background: var(--white); border-radius: 16px; padding: 22px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-point:hover { transform: translateX(8px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .why-point-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--crimson), #E02040);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .why-point h4 { font-weight: 700; color: var(--deep-navy); margin-bottom: 4px; }
+  .why-point p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
+
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; border-radius: 14px;
+    border: 1px solid #EEE; transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-item:hover { border-color: var(--gold); transform: translateX(6px); }
+  .contact-item .icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--light-gold); display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .contact-item .info strong { display: block; font-weight: 700; color: var(--deep-navy); margin-bottom: 4px; }
+  .contact-item .info a, .contact-item .info span { color: var(--text-muted); font-size: 14px; text-decoration: none; }
+  .contact-item .info a:hover { color: var(--crimson); }
+
+  .contact-form { background: var(--off-white); border-radius: 24px; padding: 36px; }
+  .contact-form h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--deep-navy); margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--deep-navy); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 1.5px solid #E5E2D8; background: var(--white);
+    font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+    resize: vertical;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,197,24,0.15);
+  }
+  .form-submit {
+    width: 100%; padding: 14px; background: var(--deep-navy);
+    color: var(--white); font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; border: none; border-radius: 12px;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--crimson); transform: translateY(-2px); }
+  .form-success { display: none; text-align: center; padding: 20px; }
+  .form-success .check { font-size: 3rem; margin-bottom: 12px; }
+  .form-success p { color: var(--deep-navy); font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 60px 5% 30px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px; margin-bottom: 48px; }
+  .footer-brand .name { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 12px; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; }
+  .footer-brand .tagline { color: var(--gold); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 16px; }
+  .footer-col h5 { color: var(--white); font-weight: 700; margin-bottom: 16px; font-size: 14px; letter-spacing: 0.5px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-bottom p { font-size: 13px; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE MENU ── */
+  .mobile-nav {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: var(--deep-navy);
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 28px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    color: var(--white); text-decoration: none; font-size: 1.4rem;
+    font-weight: 600; transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--gold); }
+  .mobile-nav .close-btn {
+    position: absolute; top: 24px; right: 5%;
+    background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-right { display: none; }
+    .mobile-leadership { display: block; }
+    .why-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 5%; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mobile Menu -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-btn" onclick="toggleMenu()">✕</button>
+  <a href="#programmes" onclick="toggleMenu()">Programmes</a>
+  <a href="#courses" onclick="toggleMenu()">Courses</a>
+  <a href="#payment" onclick="toggleMenu()">Payment</a>
+  <a href="#facilities" onclick="toggleMenu()">Facilities</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#contact" class="btn-primary" onclick="toggleMenu()">Apply Now</a>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-badge">
+      <img src="logo.png" alt="NCTI Logo" onerror="this.style.display='none';this.parentElement.style.background='#F5C518';this.parentElement.innerHTML+='<span style=\'font-family:serif;font-weight:900;font-size:11px;color:#1A1A4E\'>NCTI</span>'">
+    </div>
+    <div class="nav-logo-text">
+      <strong>Northwestern Christian</strong>
+      <span>Training Institute</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#programmes">Programmes</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#payment">Payment</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Apply Now →</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Intake Banner -->
+<div class="intake-banner" style="margin-top:70px;">
+  <span class="label">June Intake Ongoing</span>
+  <strong>2026 – 2027 Academic Year</strong>
+  <span class="pill">Enroll Today</span>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Admissions Open — June Intake 2026
+    </div>
+    <h1>Where Faith Meets <span>Excellence</span> in Learning</h1>
+    <p class="hero-sub">NCTI builds foundations for lifelong success, offering accredited programmes from Certificate to Bachelor's Degree that transform lives through quality Christian education.</p>
+    <div class="hero-actions">
+      <a href="#programmes" class="btn-primary">Explore Programmes →</a>
+      <a href="#contact" class="btn-secondary">📞 Contact Us</a>
+    </div>
+    <!-- Logo + Stats -->
+    <div style="display:flex;align-items:center;gap:24px;margin-top:48px;flex-wrap:wrap;">
+      <!-- NCTI Seal -->
+      <div style="width:90px;height:90px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px rgba(245,197,24,0.5);flex-shrink:0;overflow:hidden;">
+        <img src="logo.png" alt="NCTI Seal" style="width:86px;height:86px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="stat-card"><div class="number">25+</div><div class="label">Years of Excellence</div></div>
+        <div class="stat-card"><div class="number">50+</div><div class="label">Study Programmes</div></div>
+        <div class="stat-card"><div class="number">100%</div><div class="label">Committed to You</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leadership Panel -->
+  <div class="hero-right">
+    <div class="leadership-panel">
+      <div class="panel-title">School Top Leadership 2025</div>
+      <div class="leaders-row">
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="minodi.jpg" alt="Dr Albert Minodi" onerror="this.outerHTML='AM'"></div>
+          <div class="leader-name">Dr Albert Minodi</div>
+          <div class="leader-role">President</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="ayoma.jpg" alt="Mildred Ayoma Ebole" onerror="this.outerHTML='MA'"></div>
+          <div class="leader-name">Mildred Ayoma Ebole</div>
+          <div class="leader-role">Kenya Registered NTI</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="mulumbi.jpg" alt="Dr Robert Mulumbi" onerror="this.outerHTML='RM'"></div>
+          <div class="leader-name">Dr Robert Mulumbi</div>
+          <div class="leader-role">International Director</div>
+        </div>
+      </div>
+      <div class="leaders-row-bottom">
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="ezine.jpg" alt="Dr Enos Ezine" onerror="this.outerHTML='EE'"></div>
+          <div class="leader-name">Dr Enos Ezine</div>
+          <div class="leader-role">National Director, Kenya</div>
+        </div>
+        <div class="leader-card">
+          <div class="leader-avatar"><img src="karanu.jpg" alt="Jesse Karanu" onerror="this.outerHTML='JK'"></div>
+          <div class="leader-name">Jesse Karanu</div>
+          <div class="leader-role">Head of Publicity &amp; Communication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Leadership (visible on phones only) -->
+<div class="mobile-leadership">
+  <div class="panel-title">School Top Leadership 2025</div>
+  <div class="mobile-leaders-grid">
+    <div class="mobile-leader-card">
+      <div class="mobile-leader-avatar"><img src="minodi.jpg" alt="Dr Albert Minodi" onerror="this.outerHTML='AM'"></div>
+      <div class="mobile-leader-name">Dr Albert Minodi</div>
+      <div class="mobile-leader-role">President</div>
+    </div>
+    <div class="mobile-leader-card">
+      <div class="mobile-leader-avatar"><img src="ayoma.jpg" alt="Mildred Ayoma Ebole" onerror="this.outerHTML='MA'"></div>
+      <div class="mobile-leader-name">Mildred Ayoma Ebole</div>
+      <div class="mobile-leader-role">Kenya Registered NTI</div>
+    </div>
+    <div class="mobile-leader-card">
+      <div class="mobile-leader-avatar"><img src="mulumbi.jpg" alt="Dr Robert Mulumbi" onerror="this.outerHTML='RM'"></div>
+      <div class="mobile-leader-name">Dr Robert Mulumbi</div>
+      <div class="mobile-leader-role">International Director</div>
+    </div>
+  </div>
+  <div class="mobile-leaders-bottom">
+    <div class="mobile-leader-card">
+      <div class="mobile-leader-avatar"><img src="ezine.jpg" alt="Dr Enos Ezine" onerror="this.outerHTML='EE'"></div>
+      <div class="mobile-leader-name">Dr Enos Ezine</div>
+      <div class="mobile-leader-role">National Director, Kenya</div>
+    </div>
+    <div class="mobile-leader-card">
+      <div class="mobile-leader-avatar"><img src="karanu.jpg" alt="Jesse Karanu" onerror="this.outerHTML='JK'"></div>
+      <div class="mobile-leader-name">Jesse Karanu</div>
+      <div class="mobile-leader-role">Head of Publicity &amp; Communication</div>
+    </div>
+  </div>
+</div>
+
+<!-- Programmes -->
+<section class="programmes" id="programmes">
+  <div class="reveal">
+    <div class="section-label">Our Programmes</div>
+    <h2 class="section-title">Choose Your Path to Success</h2>
+    <p class="section-subtitle">We offer flexible, affordable programmes designed to equip students with knowledge and skills for a purposeful life and career.</p>
+  </div>
+  <div class="prog-grid">
+    <!-- Diploma -->
+    <div class="prog-card reveal">
+      <div class="prog-card-top">
+        <span class="badge">Most Popular</span>
+        <h3>Diploma Programme</h3>
+        <p class="duration">📅 Duration: 2 Years</p>
+      </div>
+      <div class="prog-card-body">
+        <div class="fee-row">
+          <span class="fee-label">Registration Fee</span>
+          <span class="fee-amount">KShs 1,000 <span>one-time</span></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-label">Tuition Fee</span>
+          <span class="fee-amount">KShs 30,000 <span>per year</span></span>
+        </div>
+        <ul style="margin-top:20px;padding-left:20px;color:var(--text-muted);font-size:14px;line-height:2;">
+          <li>Comprehensive 2-year curriculum</li>
+          <li>Industry-aligned coursework</li>
+          <li>Practical skill development</li>
+          <li>Recognized qualification</li>
+        </ul>
+        <a href="#contact" class="enroll-btn">Enroll for Diploma →</a>
+      </div>
+    </div>
+    <!-- Certificate -->
+    <div class="prog-card reveal">
+      <div class="prog-card-top" style="background:linear-gradient(135deg,var(--crimson),#8B0E1E);">
+        <span class="badge" style="background:var(--white);color:var(--crimson);">Flexible Duration</span>
+        <h3>Certificate Programme</h3>
+        <p class="duration">📅 Duration: 6 Months – 1 Year</p>
+      </div>
+      <div class="prog-card-body">
+        <div class="fee-row">
+          <span class="fee-label">Registration Fee</span>
+          <span class="fee-amount">KShs 500 <span>one-time</span></span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-label">Tuition Fee</span>
+          <span class="fee-amount">KShs 15,000 <span>total</span></span>
+        </div>
+        <ul style="margin-top:20px;padding-left:20px;color:var(--text-muted);font-size:14px;line-height:2;">
+          <li>Short, focused curriculum</li>
+          <li>Flexible 6–12 month track</li>
+          <li>Fast entry to career paths</li>
+          <li>Affordable and accessible</li>
+        </ul>
+        <a href="#contact" class="enroll-btn" style="background:var(--crimson);">Enroll for Certificate →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Courses Directory -->
+<section class="courses-section" id="courses">
+  <div class="reveal">
+    <div class="section-label">Course Directory</div>
+    <h2 class="section-title">All Programmes &amp; Courses</h2>
+    <p class="section-subtitle">Browse our full catalogue — from short certificates to Bachelor's degree programmes.</p>
+  </div>
+  <div class="course-tabs">
+    <button class="tab-btn active" onclick="showTab('cert',event)">📜 Certificate</button>
+    <button class="tab-btn" onclick="showTab('dip',event)">🎓 Diploma</button>
+    <button class="tab-btn" onclick="showTab('ba',event)">🏛️ Bachelor's Degree (BA)</button>
+  </div>
+
+  <!-- Certificate -->
+  <div class="course-panel active reveal" id="panel-cert">
+    <div class="course-level-badge">📜 Certificate Programmes &nbsp;|&nbsp; 6 Months – 1 Year &nbsp;|&nbsp; KShs 15,000</div>
+    <div class="course-grid">
+      <div class="course-item"><div class="course-item-icon cert-icon">📜</div><div><div class="course-item-name">Certificate (General)</div><div class="course-item-code">CERT-GEN</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">CERT-BIBLE &amp; THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">⛪</div><div><div class="course-item-name">Christian Ministry</div><div class="course-item-code">CERT-CHRISTIAN MINISTRY</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">📖</div><div><div class="course-item-name">Christian Theology</div><div class="course-item-code">CERT-CHRISTIAN THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">🙏</div><div><div class="course-item-name">Chaplaincy</div><div class="course-item-code">CERT-CHAPLAINCY</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">📰</div><div><div class="course-item-name">Journalism</div><div class="course-item-code">CERT-JOURNALISM</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">💼</div><div><div class="course-item-name">Business Studies</div><div class="course-item-code">CERT-BUSINESS STUDIES</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">🤝</div><div><div class="course-item-name">Christian Social Work</div><div class="course-item-code">CERT-CHRISTIAN SOCIAL WORK</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">📣</div><div><div class="course-item-name">Marketing</div><div class="course-item-code">CERT-MARKETING</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">📡</div><div><div class="course-item-name">Advertising &amp; Public Relations</div><div class="course-item-code">CERT-ADVERTISING &amp; PR</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">🏨</div><div><div class="course-item-name">Hospitality Management</div><div class="course-item-code">CERT-HOSPITALITY MANAGEMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">👥</div><div><div class="course-item-name">Human Resource Development</div><div class="course-item-code">CERT-HUMAN RESOURCE DEV</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">💬</div><div><div class="course-item-name">Christian Counseling</div><div class="course-item-code">CERT-CHRISTIAN COUNSELING</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">🌱</div><div><div class="course-item-name">Community Development</div><div class="course-item-code">CERT-COMMUNITY DEVELOPMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon cert-icon">🌟</div><div><div class="course-item-name">Leadership</div><div class="course-item-code">CERT-LEADERSHIP</div></div></div>
+    </div>
+    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="font-size:1.5rem;">💡</span>
+      <div><strong style="color:var(--deep-navy);">Registration Fee: KShs 500</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">One-time registration. Short, focused curriculum for fast career entry.</p></div>
+      <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
+    </div>
+  </div>
+
+  <!-- Diploma -->
+  <div class="course-panel reveal" id="panel-dip">
+    <div class="course-level-badge">🎓 Diploma Programmes &nbsp;|&nbsp; 2 Years &nbsp;|&nbsp; KShs 30,000/yr</div>
+    <div class="course-grid">
+      <div class="course-item"><div class="course-item-icon dip-icon">🎓</div><div><div class="course-item-name">Diploma (General)</div><div class="course-item-code">DIP-GEN</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">DIP-BIBLE &amp; THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🕊️</div><div><div class="course-item-name">Conflict Resolution</div><div class="course-item-code">DIP-CONFLICT RESOLUTION</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🧠</div><div><div class="course-item-name">Counseling Psychology</div><div class="course-item-code">DIP-COUNSELING PSYCHOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🏢</div><div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">DIP-LAM</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📋</div><div><div class="course-item-name">Project Planning</div><div class="course-item-code">DIP-PROJECT PLANNING</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🏛️</div><div><div class="course-item-name">Public Administration</div><div class="course-item-code">DIP-PUBLIC ADMINISTRATION</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">⚖️</div><div><div class="course-item-name">Public Admin &amp; Governance</div><div class="course-item-code">DIP-PUBLIC ADMIN &amp; GOVERNANCE</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">⛪</div><div><div class="course-item-name">Christian Ministry</div><div class="course-item-code">DIP-CHRISTIAN MINISTRY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📖</div><div><div class="course-item-name">Christian Theology</div><div class="course-item-code">DIP-CHRISTIAN THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🙏</div><div><div class="course-item-name">Chaplaincy</div><div class="course-item-code">DIP-CHAPLAINCY</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📰</div><div><div class="course-item-name">Journalism</div><div class="course-item-code">DIP-JOURNALISM</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">💼</div><div><div class="course-item-name">Business Studies</div><div class="course-item-code">DIP-BUSINESS STUDIES</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🤝</div><div><div class="course-item-name">Christian Social Work</div><div class="course-item-code">DIP-CHRISTIAN SOCIAL WORK</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📣</div><div><div class="course-item-name">Marketing</div><div class="course-item-code">DIP-MARKETING</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">📡</div><div><div class="course-item-name">Advertising &amp; Public Relations</div><div class="course-item-code">DIP-ADVERTISING &amp; PR</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🏨</div><div><div class="course-item-name">Hospitality Management</div><div class="course-item-code">DIP-HOSPITALITY MANAGEMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">👥</div><div><div class="course-item-name">Human Resource Development</div><div class="course-item-code">DIP-HUMAN RESOURCE DEV</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">💬</div><div><div class="course-item-name">Christian Counseling</div><div class="course-item-code">DIP-CHRISTIAN COUNSELING</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🌱</div><div><div class="course-item-name">Community Development</div><div class="course-item-code">DIP-COMMUNITY DEVELOPMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon dip-icon">🌟</div><div><div class="course-item-name">Leadership</div><div class="course-item-code">DIP-LEADERSHIP</div></div></div>
+    </div>
+    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="font-size:1.5rem;">💡</span>
+      <div><strong style="color:var(--deep-navy);">Registration Fee: KShs 1,000</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Comprehensive 2-year curriculum with recognized qualifications.</p></div>
+      <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
+    </div>
+  </div>
+
+  <!-- BA -->
+  <div class="course-panel reveal" id="panel-ba">
+    <div class="course-level-badge">🏛️ Bachelor's Degree (BA) Programmes</div>
+    <div class="course-grid">
+      <div class="course-item"><div class="course-item-icon ba-icon">🏛️</div><div><div class="course-item-name">BA Degree (General)</div><div class="course-item-code">BA-DEGREE</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">✝️</div><div><div class="course-item-name">Bible &amp; Theology</div><div class="course-item-code">BA-BIBLE &amp; THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">💼</div><div><div class="course-item-name">Business Management</div><div class="course-item-code">BA-BUSINESS MGMT</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🧠</div><div><div class="course-item-name">Counseling Psychology</div><div class="course-item-code">BA-COUNSELING PSYCHOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">⚖️</div><div><div class="course-item-name">Criminal Justice</div><div class="course-item-code">BA-CRIMINAL JUSTICE</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🔍</div><div><div class="course-item-name">Criminology</div><div class="course-item-code">BA-CRIMINOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🧒</div><div><div class="course-item-name">ECDE &amp; Primary Education</div><div class="course-item-code">BA-ECDE &amp; PRIMARY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📖</div><div><div class="course-item-name">Education (English / Kiswahili)</div><div class="course-item-code">BA-EDU (ENG/KISW)</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🌍</div><div><div class="course-item-name">Education (History / Kiswahili)</div><div class="course-item-code">BA-EDU (HIST/KISW)</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🗺️</div><div><div class="course-item-name">Education (Kiswahili / Geography)</div><div class="course-item-code">BA-EDU (KISW/GEOG)</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🤝</div><div><div class="course-item-name">HR &amp; Social Development</div><div class="course-item-code">BA-HR &amp; SOCIAL DEV</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">👥</div><div><div class="course-item-name">Human Resource Management</div><div class="course-item-code">BA-HUMAN RESOURCE MANAGEMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🗣️</div><div><div class="course-item-name">Kiswahili / CRE</div><div class="course-item-code">BA-KISWAHILI / CRE</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🏢</div><div><div class="course-item-name">Leadership Administration &amp; Management</div><div class="course-item-code">BA-LAM</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🏛️</div><div><div class="course-item-name">Political Science</div><div class="course-item-code">BA-POLITICAL SCIENCE</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📋</div><div><div class="course-item-name">Project Planning</div><div class="course-item-code">BA-PROJECT PLANNING</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🏛️</div><div><div class="course-item-name">Public Administration</div><div class="course-item-code">BA-PUBLIC ADMINISTRATION</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">⚖️</div><div><div class="course-item-name">Public Admin &amp; Governance</div><div class="course-item-code">BA-PUBLIC ADMIN &amp; GOVERNANCE</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🔍</div><div><div class="course-item-name">Social Work &amp; Criminology</div><div class="course-item-code">BA-SOCIAL WORK &amp; CRIMINOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">♿</div><div><div class="course-item-name">Special Needs Education</div><div class="course-item-code">BA-SPECIAL NEEDS</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">⛪</div><div><div class="course-item-name">Christian Ministry</div><div class="course-item-code">BA-CHRISTIAN MINISTRY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📖</div><div><div class="course-item-name">Christian Theology</div><div class="course-item-code">BA-CHRISTIAN THEOLOGY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🙏</div><div><div class="course-item-name">Chaplaincy</div><div class="course-item-code">BA-CHAPLAINCY</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📰</div><div><div class="course-item-name">Journalism</div><div class="course-item-code">BA-JOURNALISM</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📣</div><div><div class="course-item-name">Marketing</div><div class="course-item-code">BA-MARKETING</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">📡</div><div><div class="course-item-name">Advertising &amp; Public Relations</div><div class="course-item-code">BA-ADVERTISING &amp; PR</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🏨</div><div><div class="course-item-name">Hospitality Management</div><div class="course-item-code">BA-HOSPITALITY MANAGEMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">👥</div><div><div class="course-item-name">Human Resource Development</div><div class="course-item-code">BA-HUMAN RESOURCE DEV</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">💬</div><div><div class="course-item-name">Christian Counseling</div><div class="course-item-code">BA-CHRISTIAN COUNSELING</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🌱</div><div><div class="course-item-name">Community Development</div><div class="course-item-code">BA-COMMUNITY DEVELOPMENT</div></div></div>
+      <div class="course-item"><div class="course-item-icon ba-icon">🌟</div><div><div class="course-item-name">Leadership</div><div class="course-item-code">BA-LEADERSHIP</div></div></div>
+    </div>
+    <div style="margin-top:28px;padding:20px;background:var(--light-gold);border-radius:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span style="font-size:1.5rem;">💡</span>
+      <div><strong style="color:var(--deep-navy);">20 Specializations Available</strong><p style="color:var(--text-muted);font-size:13px;margin-top:2px;">Contact admissions for fee structure and entry requirements.</p></div>
+      <a href="#contact" class="btn-primary" style="margin-left:auto;white-space:nowrap;">Apply Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Payment Details -->
+<section class="payment-section" id="payment">
+  <div class="reveal">
+    <div class="section-label" style="color:var(--gold);">How to Pay</div>
+    <h2 class="section-title">Payment Details</h2>
+    <p class="section-subtitle">Pay your registration and tuition fees conveniently via M-Pesa Paybill, mobile money, or direct bank deposit.</p>
+  </div>
+  <div class="payment-grid">
+
+    <!-- M-Pesa Paybill -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">📱</div>
+      <h4>M-Pesa Paybill (Lipa Na Paybill)</h4>
+      <div class="pay-detail"><span class="lbl">Business Number</span><span class="val">400200</span></div>
+      <div class="pay-detail"><span class="lbl">Account Number</span><span class="val">1049314</span></div>
+      <div class="pay-detail"><span class="lbl">Account Name</span><span class="val" style="font-size:12px;">North Western Christian Training Institute</span></div>
+      <div class="pay-methods-list">
+        <span class="pay-chip">📱 M-Pesa</span>
+        <span class="pay-chip">Airtel Money</span>
+        <span class="pay-chip">T-Kash</span>
+        <span class="pay-chip">PesaLink</span>
+        <span class="pay-chip">Mco-op Cash</span>
+      </div>
+      <div class="pay-note">Dial *334# (Airtel), *160# (T-Kash), or *667# (Mco-op Cash). Use your <strong style="color:var(--gold)">Full Name</strong> and <strong style="color:var(--gold)">Registration Number</strong> as the account reference.</div>
+    </div>
+
+    <!-- Co-op Bank -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">🏦</div>
+      <h4>Co-operative Bank — Direct Deposit</h4>
+      <div class="pay-detail"><span class="lbl">Bank</span><span class="val">Co-operative Bank</span></div>
+      <div class="pay-detail"><span class="lbl">Account Name</span><span class="val" style="font-size:12px;">North Western Christian Training Institute</span></div>
+      <div class="pay-detail"><span class="lbl">Account Number</span><span class="val">01101938930002</span></div>
+      <div class="pay-detail"><span class="lbl">Account Type</span><span class="val">Current</span></div>
+      <div class="pay-methods-list">
+        <span class="pay-chip">Bank Transfer</span>
+        <span class="pay-chip">RTGS</span>
+        <span class="pay-chip">EFT</span>
+        <span class="pay-chip">PesaLink</span>
+      </div>
+      <div class="pay-note">After payment, send your deposit slip or M-Pesa confirmation to <strong style="color:var(--gold)">+254 725 979 300</strong> on WhatsApp together with your full name and course.</div>
+    </div>
+
+    <!-- Fee Summary -->
+    <div class="pay-card reveal">
+      <div class="pay-card-icon">💰</div>
+      <h4>Fee Summary</h4>
+      <div class="pay-detail"><span class="lbl">Certificate Registration</span><span class="val">KShs 500</span></div>
+      <div class="pay-detail"><span class="lbl">Certificate Tuition</span><span class="val">KShs 15,000</span></div>
+      <div class="pay-detail"><span class="lbl">Diploma Registration</span><span class="val">KShs 1,000</span></div>
+      <div class="pay-detail"><span class="lbl">Diploma Tuition/yr</span><span class="val">KShs 30,000</span></div>
+      <div class="pay-detail"><span class="lbl">BA &amp; Above Registration</span><span class="val">KShs 1,000</span></div>
+      <div class="pay-note">Tuition for BA, MA, and PhD programmes — contact admissions for the current fee structure.</div>
+      <a href="#contact" class="btn-primary" style="margin-top:20px;display:flex;justify-content:center;">📞 Ask Admissions</a>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities -->
+<section class="facilities" id="facilities">
+  <div class="reveal">
+    <div class="section-label" style="color:var(--gold);">Campus Life</div>
+    <h2 class="section-title">World-Class Facilities</h2>
+    <p class="section-subtitle">Our campus is equipped with modern facilities designed to support learning, growth, and holistic development.</p>
+  </div>
+  <div class="fac-grid">
+    <div class="fac-card reveal">
+      <div class="fac-icon">🏛️</div>
+      <h4>State-of-the-Art Classrooms</h4>
+      <p>Modern, well-equipped learning spaces designed for interactive and engaging education.</p>
+    </div>
+    <div class="fac-card reveal">
+      <div class="fac-icon">🔬</div>
+      <h4>Science Laboratories</h4>
+      <p>Fully equipped science labs enabling hands-on experiments and practical learning.</p>
+    </div>
+    <div class="fac-card reveal">
+      <div class="fac-icon">💻</div>
+      <h4>Computer Laboratory</h4>
+      <p>Modern computer lab with internet access to support digital learning and research.</p>
+    </div>
+    <div class="fac-card reveal">
+      <div class="fac-icon">📚</div>
+      <h4>Library & Media Center</h4>
+      <p>A rich collection of books, journals, and digital media resources for comprehensive study.</p>
+    </div>
+    <div class="fac-card reveal">
+      <div class="fac-icon">⚽</div>
+      <h4>Sports & Recreation</h4>
+      <p>Recreation facilities that promote physical well-being, teamwork, and healthy living.</p>
+    </div>
+    <div class="fac-card reveal">
+      <div class="fac-icon">🙏</div>
+      <h4>Chapel & Spiritual Life</h4>
+      <p>A dedicated space for worship, reflection, and spiritual formation at the heart of campus.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Why Us -->
+<section class="why-us" id="about">
+  <div class="why-grid">
+    <div class="why-visual reveal">
+      <div class="quote">"At Northwestern Christian Training Institute, we don't just educate — we shape character, nurture faith, and build leaders who make a lasting difference in their communities."</div>
+      <div class="cite">— Northwestern Christian Training Institute</div>
+    </div>
+    <div>
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Built on Faith. Driven by Purpose.</h2>
+      <div class="why-points" style="margin-top:28px;">
+        <div class="why-point reveal">
+          <div class="why-point-icon">🎓</div>
+          <div>
+            <h4>Accredited Qualifications</h4>
+            <p>Our Diploma and Certificate programmes are recognized qualifications that open doors to further education and employment.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-icon">💰</div>
+          <div>
+            <h4>Affordable Fees</h4>
+            <p>Quality education at an accessible cost. Competitive fees with flexible payment options to suit your circumstances.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-icon">🌟</div>
+          <div>
+            <h4>Holistic Development</h4>
+            <p>We nurture the mind, body, and spirit — producing well-rounded graduates ready for modern challenges.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-icon">✝️</div>
+          <div>
+            <h4>Christ-Centred Foundation</h4>
+            <p>Over 25 years of building lives and communities on the foundation of Christian values and integrity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Ready to Begin Your Journey?</h2>
+    <p class="section-subtitle">Reach out to us today or fill in the form below and our admissions team will get back to you promptly.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="icon">💳</div>
+        <div class="info">
+          <strong>M-Pesa Paybill</strong>
+          <span>Business No: <strong>400200</strong> · Account: <strong>1049314</strong></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🏦</div>
+        <div class="info">
+          <strong>Co-op Bank Account</strong>
+          <span>01101938930002 (Current)</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📞</div>
+        <div class="info">
+          <strong>Phone / WhatsApp</strong>
+          <a href="tel:+254725979300">+254 725 979 300</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🌐</div>
+        <div class="info">
+          <strong>Website</strong>
+          <a href="http://www.northwesternchristiantraininginstitute.com" target="_blank">www.northwesternchristiantraininginstitute.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">✉️</div>
+        <div class="info">
+          <strong>Email</strong>
+          <a href="mailto:northwesternchristiantraininginstitute@outlook.com">northwesternchristiantraininginstitute@outlook.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📅</div>
+        <div class="info">
+          <strong>Intake Period</strong>
+          <span>June Intake 2026 — Now Open for 2026–2027</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <h3>Send Us a Message</h3>
+      <div id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" id="fname">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Doe" id="lname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+254 700 000 000" id="phone">
+        </div>
+        <div class="form-group">
+          <label>Programme of Interest</label>
+          <select id="programme">
+            <option value="">Select a programme</option>
+            <option>Diploma (2 Years) — KShs 30,000</option>
+            <option>Certificate (6 Months) — KShs 15,000</option>
+            <option>Certificate (1 Year) — KShs 15,000</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea rows="3" placeholder="Tell us about your goals or any questions..." id="message"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send Enquiry →</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="check">✅</div>
+        <p>Thank you! Your enquiry has been sent.<br>Our team will contact you shortly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="name">NCTI — Northwestern Christian Training Institute</div>
+      <p>Building foundations for lifelong learning, success, and faithful service since 1999. Study to Shine.</p>
+      <div class="tagline">✦ Study to Shine ✦</div>
+    </div>
+    <div class="footer-col">
+      <h5>Programmes</h5>
+      <ul>
+        <li><a href="#courses">Certificate Programmes</a></li>
+        <li><a href="#courses">Diploma Programmes</a></li>
+        <li><a href="#courses">Bachelor's Degree (BA)</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>How to Pay</h5>
+      <ul>
+        <li><a href="#payment">M-Pesa Paybill: 400200</a></li>
+        <li><a href="#payment">Account No: 1049314</a></li>
+        <li><a href="#payment">Co-op Bank: 01101938930002</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 NCTI — Northwestern Christian Training Institute. All rights reserved.</p>
+    <p><a href="mailto:northwesternchristiantraininginstitute@outlook.com" style="color:var(--gold);text-decoration:none;">northwesternchristiantraininginstitute@outlook.com</a></p>
+  </div>
+</footer>
+
+<script>
+  // Course tabs
+  function showTab(id, event) {
+    document.querySelectorAll('.course-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    if(event && event.target) event.target.classList.add('active');
+  }
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const prog = document.getElementById('programme').value;
+    if (!fname || !phone || !prog) {
+      alert('Please fill in your name, phone number, and select a programme.');
+      return;
+    }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
